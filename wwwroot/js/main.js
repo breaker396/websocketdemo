@@ -25,7 +25,7 @@ var user = null;
 var caller = null;
 
 $(document).ready(function () {
-    server.value = scheme + "://" + document.location.hostname + port + "/ws";
+    server.value = scheme + "://" + document.location.hostname + port + "/ws/Sub";
 });
 
 
@@ -85,8 +85,10 @@ btnConnect.onclick = function () {
         console.info(`Receive ${Date.now()}`);
         document.getElementById('img').src = '';
         var image = new Image();
-        //image.src = `data:image/jpeg;base64,${message.data}`;
-        image.src = message.data;
+        image.src = `data:image/jpeg;base64,${message.data}`;
+        //image.src = message.data;
+        //image.src = URL.createObjectURL(message.data)
+        
         document.getElementById('img').src = image.src;
     }
 };

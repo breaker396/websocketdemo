@@ -1,6 +1,7 @@
 using CameraStream;
 using CameraStream.Hubs;
 using CameraStream.Models;
+using CameraStream.Utils;
 using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddSignalR(o =>
 builder.Services.AddSingleton<List<User>>();
 builder.Services.AddSingleton<List<Connection>>();
 builder.Services.AddSingleton<List<Call>>();
+builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
@@ -49,8 +51,14 @@ app.UseCors("CorsPolicy");
 app.UseRouting();
 
 app.UseAuthorization();
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2)
+};
 
-app.UseStreamSocket();
+app.UseWebSockets(webSocketOptions);
+
+//app.UseStreamSocket();
 
 app.MapHub<ConnectionHub>("/cnnctn", options =>
 {
