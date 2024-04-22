@@ -1,2 +1,10 @@
 /obj
 /CameraStream.csproj.user
+/bin/Debug/net8.0/CameraStream.deps.json
+/bin/Debug/net8.0/CameraStream.dll
+/bin/Debug/net8.0/CameraStream.exe
+/bin/Debug/net8.0/CameraStream.pdb
+/bin/Debug/net8.0/CameraStream.runtimeconfig.json
+/bin/Debug/net8.0/CameraStream.staticwebassets.runtime.json
+/bin/Debug/net8.0/appsettings.Development.json
+/bin/Debug/net8.0/appsettings.json

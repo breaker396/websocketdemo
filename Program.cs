@@ -1,6 +1,7 @@
 using CameraStream;
 using CameraStream.Hubs;
 using CameraStream.Models;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,13 @@ builder.Services.AddSignalR(o =>
 builder.Services.AddSingleton<List<User>>();
 builder.Services.AddSingleton<List<Connection>>();
 builder.Services.AddSingleton<List<Call>>();
-
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.ForwardLimit = 2;
+    options.ForwardedForHeaderName = "Header_Name_Used_By_Proxy_For_X-Forwarded-For_Header";
+    options.ForwardedProtoHeaderName = "Header_Name_Used_By_Proxy_For_X-Forwarded-Proto_Header";
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
