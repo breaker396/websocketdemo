@@ -57,7 +57,7 @@ var webSocketOptions = new WebSocketOptions
     KeepAliveInterval = TimeSpan.FromMinutes(2)
 };
 
-//app.UseWebSockets(webSocketOptions);
+app.UseWebSockets(webSocketOptions);
 //app.UseWebSocketFlv(liveStreamingServer);
 
 //app.UseHttpFlv(liveStreamingServer);
