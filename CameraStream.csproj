@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="LiveStreamingServerNet" Version="0.9.0" />
+    <PackageReference Include="LiveStreamingServerNet.Flv" Version="0.9.0" />
+  </ItemGroup>
+
 </Project>
