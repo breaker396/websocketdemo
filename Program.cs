@@ -1,12 +1,7 @@
-using CameraStream;
 using CameraStream.Hubs;
 using CameraStream.Models;
 using CameraStream.Utils;
-using LiveStreamingServerNet.Networking.Helpers;
-using LiveStreamingServerNet;
 using Microsoft.AspNetCore.HttpOverrides;
-using System.Net;
-using LiveStreamingServerNet.Flv.Installer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,11 +29,11 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedForHeaderName = "Header_Name_Used_By_Proxy_For_X-Forwarded-For_Header";
     options.ForwardedProtoHeaderName = "Header_Name_Used_By_Proxy_For_X-Forwarded-Proto_Header";
 });
-using var liveStreamingServer = LiveStreamingServerBuilder.Create()
-    .ConfigureRtmpServer(options => options.AddFlv())
-    .ConfigureLogging(options => options.AddConsole())
-    .Build();
-builder.Services.AddBackgroundServer(liveStreamingServer, new IPEndPoint(IPAddress.Any, 1935));
+//using var liveStreamingServer = LiveStreamingServerBuilder.Create()
+    //.ConfigureRtmpServer(options => options.AddFlv())
+    //.ConfigureLogging(options => options.AddConsole())
+    //.Build();
+//builder.Services.AddBackgroundServer(liveStreamingServer, new IPEndPoint(IPAddress.Any, 1935));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,18 +52,15 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.UseCors("CorsPolicy");
 
-app.UseRouting();
-
-app.UseAuthorization();
 var webSocketOptions = new WebSocketOptions
 {
     KeepAliveInterval = TimeSpan.FromMinutes(2)
 };
 
-app.UseWebSockets(webSocketOptions);
-app.UseWebSocketFlv(liveStreamingServer);
+//app.UseWebSockets(webSocketOptions);
+//app.UseWebSocketFlv(liveStreamingServer);
 
-app.UseHttpFlv(liveStreamingServer);
+//app.UseHttpFlv(liveStreamingServer);
 
 //app.UseStreamSocket();
 
