@@ -17,7 +17,7 @@ namespace CameraStream.Controllers
             if (HttpContext.WebSockets.IsWebSocketRequest)
             {
                 WebSocket webSocket;
-                if (_webSocketService.GetSub() == null)
+                if (_webSocketService.GetSub() == null || _webSocketService.GetSub().State != WebSocketState.Open)
                 {
                     webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
                     _webSocketService.AddSub(webSocket);
@@ -26,8 +26,7 @@ namespace CameraStream.Controllers
                 {
                     webSocket = _webSocketService.GetSub();
                 }
-                var desW = _webSocketService.GetPub();
-                await Stream(webSocket, desW);
+                await Stream(webSocket, true);
             }
             else
             {
@@ -40,7 +39,7 @@ namespace CameraStream.Controllers
             if (HttpContext.WebSockets.IsWebSocketRequest)
             {
                 WebSocket webSocket;
-                if (_webSocketService.GetPub() == null)
+                if (_webSocketService.GetPub() == null || _webSocketService.GetPub().State != WebSocketState.Open)
                 {
                     webSocket = await HttpContext.WebSockets.AcceptWebSocketAsync();
                     _webSocketService.AddPub(webSocket);
@@ -50,14 +49,14 @@ namespace CameraStream.Controllers
                     webSocket = _webSocketService.GetPub();
                 }
                 var desW = _webSocketService.GetSub();
-                await Stream(webSocket, desW);
+                await Stream(webSocket, false);
             }
             else
             {
                 HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             }
         }
-        private async Task Stream(WebSocket srcWebSocket, WebSocket desWebSocket)
+        private async Task Stream(WebSocket srcWebSocket, bool isSub)
         {
             var buffer = new byte[10 * 1024 * 1024];
             WebSocketReceiveResult result = await srcWebSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
@@ -65,7 +64,8 @@ namespace CameraStream.Controllers
             {
                 ArraySegment<byte> streamData = new ArraySegment<byte>(buffer, 0, result.Count);
                 byte[] imageData = streamData.ToArray();
-                if(desWebSocket != null) await desWebSocket.SendAsync(new ArraySegment<byte>(imageData, 0, imageData.Length), result.MessageType, result.EndOfMessage, CancellationToken.None);
+                WebSocket desWebSocket = isSub ? _webSocketService.GetPub() : _webSocketService.GetSub();
+                if (desWebSocket != null) _ = desWebSocket.SendAsync(new ArraySegment<byte>(imageData, 0, imageData.Length), result.MessageType, result.EndOfMessage, CancellationToken.None).ConfigureAwait(false);
                 var outputData = new ArraySegment<byte>(buffer);
                 result = await srcWebSocket.ReceiveAsync(outputData, CancellationToken.None);
             }
