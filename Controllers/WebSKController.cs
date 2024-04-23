@@ -48,7 +48,6 @@ namespace CameraStream.Controllers
                 {
                     webSocket = _webSocketService.GetPub();
                 }
-                var desW = _webSocketService.GetSub();
                 await Stream(webSocket, false);
             }
             else
@@ -64,8 +63,11 @@ namespace CameraStream.Controllers
             {
                 ArraySegment<byte> streamData = new ArraySegment<byte>(buffer, 0, result.Count);
                 byte[] imageData = streamData.ToArray();
-                WebSocket desWebSocket = isSub ? _webSocketService.GetPub() : _webSocketService.GetSub();
-                if (desWebSocket != null) _ = desWebSocket.SendAsync(new ArraySegment<byte>(imageData, 0, imageData.Length), result.MessageType, result.EndOfMessage, CancellationToken.None).ConfigureAwait(false);
+                if (!isSub)
+                {
+                    WebSocket desWebSocket = isSub ? _webSocketService.GetPub() : _webSocketService.GetSub();
+                    if (desWebSocket != null) _ = desWebSocket.SendAsync(new ArraySegment<byte>(imageData, 0, imageData.Length), result.MessageType, result.EndOfMessage, CancellationToken.None).ConfigureAwait(false);
+                }
                 var outputData = new ArraySegment<byte>(buffer);
                 result = await srcWebSocket.ReceiveAsync(outputData, CancellationToken.None);
             }
