@@ -25,7 +25,8 @@ var user = null;
 var caller = null;
 
 $(document).ready(function () {
-    server.value = scheme + "://" + document.location.hostname + port + "/ws/Sub";
+    //server.value = scheme + "://" + document.location.hostname + port + "/ws";
+    server.value = scheme + "://" + "localhost:5043" + "/ws";
 });
 
 

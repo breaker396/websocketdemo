@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LiveStreamingServerNet" Version="0.9.0" />
-    <PackageReference Include="LiveStreamingServerNet.Flv" Version="0.9.0" />
+    <PackageReference Include="OpenCvSharp4" Version="4.9.0.20240103" />
+    <PackageReference Include="OpenCvSharp4.Extensions" Version="4.9.0.20240103" />
   </ItemGroup>
 
 </Project>
