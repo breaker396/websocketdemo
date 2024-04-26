@@ -1,4 +1,5 @@
 /obj
+/CameraStream.csproj.bak
 /CameraStream.csproj.user
 /bin/Debug/net8.0/CameraStream.deps.json
 /bin/Debug/net8.0/CameraStream.dll
@@ -6,6 +7,18 @@
 /bin/Debug/net8.0/CameraStream.pdb
 /bin/Debug/net8.0/CameraStream.runtimeconfig.json
 /bin/Debug/net8.0/CameraStream.staticwebassets.runtime.json
+/bin/Debug/net8.0/LiveStreamingServerNet.Flv.dll
+/bin/Debug/net8.0/LiveStreamingServerNet.Networking.dll
+/bin/Debug/net8.0/LiveStreamingServerNet.Rtmp.dll
+/bin/Debug/net8.0/LiveStreamingServerNet.Utilities.dll
+/bin/Debug/net8.0/LiveStreamingServerNet.dll
+/bin/Debug/net8.0/MediatR.Contracts.dll
+/bin/Debug/net8.0/MediatR.dll
+/bin/Debug/net8.0/Nito.AsyncEx.Coordination.dll
+/bin/Debug/net8.0/Nito.AsyncEx.Tasks.dll
+/bin/Debug/net8.0/Nito.Collections.Deque.dll
+/bin/Debug/net8.0/Nito.Disposables.dll
 /bin/Debug/net8.0/appsettings.Development.json
 /bin/Debug/net8.0/appsettings.json
-/bin/Debug/net8.0
+/bin/Debug/net8.0/mtanksl.ActionMessageFormat.dll
+/bin/Debug/net8.0/rtmpsharp.dll
