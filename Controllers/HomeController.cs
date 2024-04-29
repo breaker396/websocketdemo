@@ -22,11 +22,15 @@ namespace CameraStream.Controllers
         {
             return View();
         }
-        public IActionResult WebRTC() 
+        public IActionResult WebRTC()
         {
             return View();
         }
         public IActionResult VideoHub()
+        {
+            return View();
+        }
+        public IActionResult FLVDemo()
         {
             return View();
         }
