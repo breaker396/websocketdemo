@@ -27,6 +27,7 @@ builder.Services.AddSingleton<List<User>>();
 builder.Services.AddSingleton<List<Connection>>();
 builder.Services.AddSingleton<List<Call>>();
 builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
+builder.Services.AddSingleton<IWebSocketSingleService, WebSocketSingleService>();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;

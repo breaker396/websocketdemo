@@ -32,4 +32,22 @@ namespace CameraStream.Utils
             return _websocketPub;
         }
     }
+    public interface IWebSocketSingleService
+    {
+        void Add(WebSocket _websocket);
+        WebSocket Get();
+    }
+    public class WebSocketSingleService : IWebSocketSingleService
+    {
+        private WebSocket _websocket;
+        public void Add(WebSocket _websocket)
+        {
+            this._websocket = _websocket;
+        }
+
+        public WebSocket Get()
+        {
+            return _websocket;
+        }
+    }
 }
