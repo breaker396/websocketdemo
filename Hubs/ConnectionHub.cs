@@ -58,8 +58,8 @@ namespace CameraStream.Hubs
 
         public async Task Call(User targetConnectionId)
         {
-            var callingUser = _users.SingleOrDefault(u => u.ConnectionId == Context.ConnectionId);
-            var targetUser = _users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
+            var callingUser = _users.FirstOrDefault(u => u.ConnectionId == Context.ConnectionId);
+            var targetUser = _users.FirstOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
 
             if (targetUser == null)
             {
@@ -86,8 +86,8 @@ namespace CameraStream.Hubs
 
         public async Task AnswerCall(bool acceptCall, User targetConnectionId)
         {
-            var callingUser = _users.SingleOrDefault(u => u.ConnectionId == Context.ConnectionId);
-            var targetUser = _users.SingleOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
+            var callingUser = _users.FirstOrDefault(u => u.ConnectionId == Context.ConnectionId);
+            var targetUser = _users.FirstOrDefault(u => u.ConnectionId == targetConnectionId.ConnectionId);
 
 
             if (callingUser == null)
@@ -136,7 +136,7 @@ namespace CameraStream.Hubs
 
         public async Task HangUp()
         {
-            var callingUser = _users.SingleOrDefault(u => u.ConnectionId == Context.ConnectionId);
+            var callingUser = _users.FirstOrDefault(u => u.ConnectionId == Context.ConnectionId);
 
             if (callingUser == null)
             {
@@ -167,8 +167,8 @@ namespace CameraStream.Hubs
 
         public async Task SendData(string data, string targetConnectionId)
         {
-            var callingUser = _users.SingleOrDefault(u => u.ConnectionId == Context.ConnectionId);
-            var targetUser = _users.SingleOrDefault(u => u.ConnectionId == targetConnectionId);
+            var callingUser = _users.FirstOrDefault(u => u.ConnectionId == Context.ConnectionId);
+            var targetUser = _users.FirstOrDefault(u => u.ConnectionId == targetConnectionId);
 
             if (callingUser == null || targetUser == null)
             {

@@ -22,3 +22,9 @@
 /bin/Debug/net8.0/appsettings.json
 /bin/Debug/net8.0/mtanksl.ActionMessageFormat.dll
 /bin/Debug/net8.0/rtmpsharp.dll
+/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll
+/bin/Debug/net8.0/OpenCvSharp.Extensions.dll
+/bin/Debug/net8.0/OpenCvSharp.dll
+/bin/Debug/net8.0/System.Drawing.Common.dll
+/bin/Debug/net8.0/runtimes/win/lib/net7.0/Microsoft.Win32.SystemEvents.dll
+/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Drawing.Common.dll
